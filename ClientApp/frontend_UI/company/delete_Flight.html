@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Delete Flight</title>
+    <style>
+      body {
+        background-color: rgb(200, 245, 253);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 10px;
+        margin-left: 0px;
+        font-size: 16px;
+        background-color: #de0788;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #de349a;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Delete Flight</h1>
+    <input type="text" id="flightID" placeholder="Enter Flight ID" />
+    <button onclick="deleteFlight()">Delete Flight</button>
+    <br />
+    <a href="../home.html">Return Home</a>
+    <script>
+      function deleteFlight() {
+        const flightID = document.getElementById("flightID").value;
+        fetch(`http://localhost:3000/delete?flightID=${flightID}`, {
+          method: "DELETE",
+          mode: "cors",
+        })
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error(error));
+      }
+    </script>
+  </body>
+</html>

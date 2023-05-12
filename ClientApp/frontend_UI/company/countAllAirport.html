@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Count All Airports</title>
+    <style>
+      body {
+        background-color: rgb(200, 245, 253);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 10px;
+        margin-left: 0px;
+        font-size: 16px;
+        background-color: #de0788;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #de349a;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Count All Airport IDs</h1>
+    <button id="count-all-airports-btn">Count All Airports</button>
+    <div id="count-all-airports-result"></div>
+
+    <br />
+    <a href="../home.html">Return Home</a>
+    <script>
+      const countAllAirportsBtn = document.getElementById(
+        "count-all-airports-btn"
+      );
+      const countAllAirportsResult = document.getElementById(
+        "count-all-airports-result"
+      );
+      countAllAirportsBtn.addEventListener("click", () => {
+        fetch("http://localhost:3000/countAllAirports")
+          .then((response) => response.json())
+          .then((data) => {
+            countAllAirportsResult.innerHTML = `There are ${data[0].count} airports.`;
+          })
+          .catch((error) => {
+            console.error(error);
+            countAllAirportsResult.innerHTML = "Internal Server Error";
+          });
+      });
+    </script>
+  </body>
+</html>

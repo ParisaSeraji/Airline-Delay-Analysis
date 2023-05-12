@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Carrier</title>
+    <style>
+      body {
+        background-color: rgb(200, 245, 253);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 10px;
+        margin-left: 0px;
+        font-size: 16px;
+        background-color: #de0788;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #de349a;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Search Carriers</h1>
+    <form id="search-form">
+      <label for="opCarrier">Enter carrier name:</label>
+      <input type="text" id="opCarrier" name="opCarrier" required />
+      <br />
+      <button type="submit">Search</button>
+    </form>
+    <div id="results"></div>
+    <br />
+    <a href="../home.html">Return Home</a>
+    <div id="results"></div>
+    <script>
+      const form = document.querySelector("#search-form");
+      const resultsDiv1 = document.querySelector("#results");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const searchTerm = form.elements.opCarrier.value;
+
+        try {
+          const response = await fetch(
+            `http://localhost:3000/carriers?opCarrier=${searchTerm}`
+          );
+          const data = await response.json();
+          resultsDiv1.innerHTML = JSON.stringify(data);
+        } catch (error) {
+          console.error(error);
+          resultsDiv1.innerHTML = "Error occurred while fetching data";
+        }
+      });
+    </script>
+  </body>
+</html>
